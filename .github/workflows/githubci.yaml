@@ -1,0 +1,95 @@
+name: Packages
+
+on:
+  push:
+    branches: [ 'turingrk1', 'release-*' ]
+    tags:
+      - "v*"
+
+jobs:
+  uboot:
+    runs-on: buildjet-2vcpu-ubuntu-2204-arm
+
+    permissions:
+      contents: read
+      packages: write
+
+
+    steps:
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # need history for `git describe` to work for Talos `Makefile`
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Fetch tags from External Repository
+        run: |
+          git remote add upstream https://github.com/siderolabs/pkgs.git
+          git fetch upstream -t
+
+      - name: use upstream container images
+        run: |
+          set -xe
+          VERSION=$(git describe --tag --always | cut -d- -f1 )
+          BASETAG=$(curl -s -H "Authorization: Bearer ${{ secrets.PAT}}" "https://ghcr.io/v2/siderolabs/base/tags/list?last=$VERSION-alpha.0" | jq -r .tags[] | grep ^$VERSION | tail -n1)
+          OPENSSLTAG=$(curl -s -H "Authorization: Bearer ${{ secrets.PAT }}" "https://ghcr.io/v2/siderolabs/openssl/tags/list?last=$VERSION-alpha.0" | jq -r .tags[] | grep ^$VERSION | tail -n1)
+          sed -i "s|- stage: base|- image: ghcr.io/siderolabs/base:$BASETAG|" u-boot/pkg.yaml
+          sed -i "s|- stage: openssl|- image: ghcr.io/siderolabs/openssl:$OPENSSLTAG|" u-boot/pkg.yaml
+
+      - name: Build and push Talos u-boot image
+        run: make u-boot
+        env:
+          PUSH: '1'
+          USERNAME: ${{ github.actor }}
+          PLATFORM: linux/arm64
+          PROGRESS: plain
+          CI_ARGS: "--cache-from=ghcr.io/${{ github.actor }}/u-boot:cache --cache-to=ghcr.io/${{ github.actor }}/u-boot:cache"
+
+  kernel:
+    runs-on: buildjet-16vcpu-ubuntu-2204-arm
+
+    permissions:
+      contents: read
+      packages: write
+
+
+    steps:
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # need history for `git describe` to work for Talos `Makefile`
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Fetch tags from External Repository
+        run: |
+          git remote add upstream https://github.com/siderolabs/pkgs.git
+          git fetch upstream -t
+
+      - name: Build and push Talos kernel image
+        run: make kernel
+        env:
+          PUSH: '1'
+          USERNAME: ${{ github.actor }}
+          PLATFORM: linux/arm64
+          PROGRESS: plain
+          CI_ARGS: "--cache-from=ghcr.io/${{ github.actor }}/kernel:cache --cache-to=ghcr.io/${{ github.actor }}/kernel:cache"
