@@ -84,10 +84,8 @@ TARGETS += u-boot
 TARGETS += util-linux
 TARGETS += xfsprogs
 TARGETS += kernel
-TARGETS += drbd-pkg
 TARGETS += gasket-driver-pkg
 TARGETS += nvidia-open-gpu-kernel-modules-pkg
-TARGETS += zfs-pkg
 NONFREE_TARGETS = nonfree-kmod-nvidia-pkg
 
 # help menu
