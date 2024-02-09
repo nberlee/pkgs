@@ -19,7 +19,7 @@ dependencies:
 steps:
   # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr restricting build to arm64 only
   - sources:
-      - url: https://github.com/ARM-software/arm-trusted-firmware/archive/{{ .arm_trusted_firmware_version }}.tar.gz
+      - url: https://github.com/ARM-software/arm-trusted-firmware/archive/lts-{{ .arm_trusted_firmware_version }}.tar.gz
         destination: arm-trusted-firmware.tar.gz
         sha256: "{{ .arm_trusted_firmware_sha256 }}"
         sha512: "{{ .arm_trusted_firmware_sha512 }}"

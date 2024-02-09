@@ -168,9 +168,9 @@ vars:
   systemd_sha512: 3bbc431a292ab590b70d3b490a528f71d30ccf478ddfa66d1c210f40c260ef49ac30651c19f2d073acf38d68398a4a6fbf95391f0e3ea0333d94b9d4e81d514f
 
   # renovate: datasource=github-tags depName=ARM-software/arm-trusted-firmware
-  arm_trusted_firmware_version: v2.10.0
-  arm_trusted_firmware_sha256: 696b8e53923aac4474532da7dd681f0bd044b329732facd65aeabea3e61adca9
-  arm_trusted_firmware_sha512: c997fa2af63282a77ba833ea08a4035a8465494d6130b0d4f255ddf95dc553f862493ba8c462aeca7b1bccf945afbe6500b836438d56a1a549554594ccdaa7f2
+  arm_trusted_firmware_version: v2.10.1
+  arm_trusted_firmware_sha256: 68fcc60676373ee4593b99ce67a3ff24a97d29a02952d9d9fd7209e938e21da9
+  arm_trusted_firmware_sha512: b41625ab1f19687c6af7c90ecebeda6c987b6971c8d1aaa17de0c791fb60a034bf0a33ef7296735445d777ef9486691c0b330bf9410e121b33a81fca3a979f16
 
   # renovate: datasource=github-tags extractVersion=^v(?<version>.*)$ depName=u-boot/u-boot
   uboot_version: 2024.01
