@@ -596,7 +596,7 @@ index 5124ee87286c..11055e98efcc 100644
  
  	u64_stats_update_begin(&txq_stats->napi_syncp);
  	u64_stats_add(&txq_stats->napi.tx_packets, tx_packets);
-@@ -5603,6 +5630,7 @@ static int stmmac_napi_poll_tx(struct napi_struct *napi, int budget)
+@@ -5605,6 +5632,7 @@ static int stmmac_napi_poll_tx(struct napi_struct *napi, int budget)
  		container_of(napi, struct stmmac_channel, tx_napi);
  	struct stmmac_priv *priv = ch->priv_data;
  	struct stmmac_txq_stats *txq_stats;
@@ -604,7 +604,7 @@ index 5124ee87286c..11055e98efcc 100644
  	u32 chan = ch->index;
  	int work_done;
  
-@@ -5611,7 +5639,7 @@ static int stmmac_napi_poll_tx(struct napi_struct *napi, int budget)
+@@ -5613,7 +5641,7 @@ static int stmmac_napi_poll_tx(struct napi_struct *napi, int budget)
  	u64_stats_inc(&txq_stats->napi.poll);
  	u64_stats_update_end(&txq_stats->napi_syncp);
  
@@ -613,7 +613,7 @@ index 5124ee87286c..11055e98efcc 100644
  	work_done = min(work_done, budget);
  
  	if (work_done < budget && napi_complete_done(napi, work_done)) {
-@@ -5622,6 +5624,10 @@ static int stmmac_napi_poll_tx(struct napi_struct *napi, int budget)
+@@ -5624,6 +5626,10 @@ static int stmmac_napi_poll_tx(struct napi_struct *napi, int budget)
  		spin_unlock_irqrestore(&ch->lock, flags);
  	}
  
@@ -624,7 +624,7 @@ index 5124ee87286c..11055e98efcc 100644
  	return work_done;
  }
  
-@@ -5630,6 +5637,7 @@ static int stmmac_napi_poll_rxtx(struct napi_struct *napi, int budget)
+@@ -5632,6 +5639,7 @@ static int stmmac_napi_poll_rxtx(struct napi_struct *napi, int budget)
  	struct stmmac_channel *ch =
  		container_of(napi, struct stmmac_channel, rxtx_napi);
  	struct stmmac_priv *priv = ch->priv_data;
@@ -632,7 +632,7 @@ index 5124ee87286c..11055e98efcc 100644
  	int rx_done, tx_done, rxtx_done;
  	struct stmmac_rxq_stats *rxq_stats;
  	struct stmmac_txq_stats *txq_stats;
-@@ -5645,7 +5678,7 @@ static int stmmac_napi_poll_rxtx(struct napi_struct *napi, int budget)
+@@ -5647,7 +5680,7 @@ static int stmmac_napi_poll_rxtx(struct napi_struct *napi, int budget)
  	u64_stats_inc(&txq_stats->napi.poll);
  	u64_stats_update_end(&txq_stats->napi_syncp);
  
@@ -641,7 +641,7 @@ index 5124ee87286c..11055e98efcc 100644
  	tx_done = min(tx_done, budget);
  
  	rx_done = stmmac_rx_zc(priv, budget, chan);
-@@ -5670,6 +5677,10 @@ static int stmmac_napi_poll_rxtx(struct napi_struct *napi, int budget)
+@@ -5672,6 +5679,10 @@ static int stmmac_napi_poll_rxtx(struct napi_struct *napi, int budget)
  		spin_unlock_irqrestore(&ch->lock, flags);
  	}
  

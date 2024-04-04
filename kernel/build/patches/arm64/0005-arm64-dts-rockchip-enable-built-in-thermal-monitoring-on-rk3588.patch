@@ -157,7 +157,7 @@ index 36b1b7acfe6a..9bf197358642 100644
  
  / {
  	compatible = "rockchip,rk3588";
-@@ -2056,6 +2056,7 @@
+@@ -2054,6 +2054,7 @@
  		assigned-clock-rates = <2000000>;
  		resets = <&cru SRST_P_TSADC>, <&cru SRST_TSADC>;
  		reset-names = "tsadc-apb", "tsadc";
@@ -165,7 +165,7 @@ index 36b1b7acfe6a..9bf197358642 100644
  		rockchip,hw-tshut-temp = <120000>;
  		rockchip,hw-tshut-mode = <0>; /* tshut mode 0:CRU 1:GPIO */
  		rockchip,hw-tshut-polarity = <0>; /* tshut polarity 0:LOW 1:HIGH */
-@@ -2063,7 +2063,180 @@ tsadc: tsadc@fec00000 {
+@@ -2061,7 +2061,180 @@ tsadc: tsadc@fec00000 {
  		pinctrl-1 = <&tsadc_shut>;
  		pinctrl-names = "gpio", "otpout";
  		#thermal-sensor-cells = <1>;

@@ -298,7 +298,7 @@ index 2afb2bd25977..0323d5ac20f5 100644
  	if (priv->dma_cap.fpesel) {
  		stmmac_fpe_start_wq(priv);
  
-@@ -5018,7 +5020,12 @@ static void stmmac_dispatch_skb_zc(struct stmmac_priv *priv, u32 queue,
+@@ -5020,7 +5022,12 @@ static void stmmac_dispatch_skb_zc(struct stmmac_priv *priv, u32 queue,
  	}
  
  	stmmac_get_rx_hwtstamp(priv, p, np, skb);
@@ -312,7 +312,7 @@ index 2afb2bd25977..0323d5ac20f5 100644
  	skb->protocol = eth_type_trans(skb, priv->dev);
  
  	if (unlikely(!coe) || !stmmac_has_ip_ethertype(skb))
-@@ -5532,7 +5539,14 @@ static int stmmac_rx(struct stmmac_priv *priv, int limit, u32 queue)
+@@ -5534,7 +5541,14 @@ static int stmmac_rx(struct stmmac_priv *priv, int limit, u32 queue)
  		/* Got entire packet into SKB. Finish it. */
  
  		stmmac_get_rx_hwtstamp(priv, p, np, skb);
@@ -328,7 +328,7 @@ index 2afb2bd25977..0323d5ac20f5 100644
  		skb->protocol = eth_type_trans(skb, priv->dev);
  
  		if (unlikely(!coe) || !stmmac_has_ip_ethertype(skb))
-@@ -5838,6 +5852,13 @@ static int stmmac_set_features(struct net_device *netdev,
+@@ -5840,6 +5854,13 @@ static int stmmac_set_features(struct net_device *netdev,
  			stmmac_enable_sph(priv, priv->ioaddr, sph_en, chan);
  	}
  
@@ -342,7 +342,7 @@ index 2afb2bd25977..0323d5ac20f5 100644
  	return 0;
  }
  
-@@ -7533,6 +7554,9 @@ int stmmac_dvr_probe(struct device *device,
+@@ -7535,6 +7556,9 @@ int stmmac_dvr_probe(struct device *device,
  #ifdef STMMAC_VLAN_TAG_USED
  	/* Both mac100 and gmac support receive VLAN tag detection */
  	ndev->features |= NETIF_F_HW_VLAN_CTAG_RX | NETIF_F_HW_VLAN_STAG_RX;

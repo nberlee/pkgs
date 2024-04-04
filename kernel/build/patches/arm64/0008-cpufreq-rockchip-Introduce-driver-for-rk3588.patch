@@ -26,7 +26,7 @@ diff --git a/drivers/cpufreq/Kconfig.arm b/drivers/cpufreq/Kconfig.arm
 index 123b4bbfcfee..6fdc2f0430bb 100644
 --- a/drivers/cpufreq/Kconfig.arm
 +++ b/drivers/cpufreq/Kconfig.arm
-@@ -189,6 +189,16 @@ config ARM_RASPBERRYPI_CPUFREQ
+@@ -190,6 +190,16 @@ config ARM_RASPBERRYPI_CPUFREQ
  
  	  If in doubt, say N.
  

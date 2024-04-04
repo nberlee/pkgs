@@ -130,6 +130,13 @@ index b517debf2b54..bbb6d38cd159 100644
 +++ b/arch/arm64/boot/dts/rockchip/rk3588-turing-rk1.dtsi
 @@ -322,13 +321,13 @@ &pcie3x4 {
  &pinctrl {
+ 	hym8563 {
+ 		hym8563_int: hym8563-int {
+-			rockchip,pins = <0 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
++			rockchip,pins = <0 RK_PB0 RK_FUNC_GPIO &pcfg_pull_up>;
+ 		};
+ 	};
+
  	fan {
  		fan_int: fan-int {
 -			rockchip,pins = <0 RK_PA4 RK_FUNC_GPIO &pcfg_pull_none>;
@@ -137,10 +144,4 @@ index b517debf2b54..bbb6d38cd159 100644
  		};
  	};
  
- 	hym8563 {
- 		hym8563_int: hym8563-int {
--			rockchip,pins = <0 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
-+			rockchip,pins = <0 RK_PB0 RK_FUNC_GPIO &pcfg_pull_up>;
- 		};
- 	};
  
